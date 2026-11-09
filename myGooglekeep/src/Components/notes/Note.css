@@ -8,16 +8,38 @@
 }
 
 .note {
-  background: #fff;
+  background: var(--note-background, var(--surface));
   flex: 1 1 240px;
   max-width: 320px;
   min-height: 116px;
   padding: 16px;
-  border: 1px solid #dadce0;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   position: relative;
   overflow-wrap: anywhere;
   transition: box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.note[data-default-color='true'] {
+  background: var(--surface);
+}
+
+.note[data-default-color='false'] {
+  color: #202124;
+}
+
+.note[data-default-color='false'] .title {
+  color: #202124;
+}
+
+.note[data-default-color='false'] .text,
+.note[data-default-color='false'] .note-reminder {
+  color: #5f6368;
+}
+
+.note.drag-over {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.22);
 }
 
 .note:hover {
@@ -26,24 +48,117 @@
 }
 
 .note .title {
-  margin: 0 0 10px;
-  color: #202124;
+  margin: 0 32px 10px 0;
+  color: var(--text-primary);
   font-size: 16px;
   font-weight: 500;
 }
 
 .note .text {
   margin: 0;
-  color: #5f6368;
+  color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.5;
+}
+
+.pin-button,
+.note-action {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  background: transparent;
+  cursor: pointer;
+}
+
+.pin-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  opacity: 0;
+  transition: opacity 160ms ease, background-color 160ms ease;
+}
+
+.note:hover .pin-button,
+.note:focus-within .pin-button,
+.pin-button.is-pinned {
+  opacity: 1;
+}
+
+.pin-button:hover,
+.note-action:hover {
+  background: rgba(95, 99, 104, 0.12);
+}
+
+.pin-button.is-pinned {
+  color: var(--text-primary);
+}
+
+.note-drag-handle {
+  position: absolute;
+  top: 14px;
+  right: 44px;
+  color: var(--text-secondary);
+  font-size: 20px;
+  opacity: 0;
+  cursor: grab;
+  transition: opacity 160ms ease;
+}
+
+.note:hover .note-drag-handle,
+.note:focus-within .note-drag-handle {
+  opacity: 0.75;
+}
+
+.pin-button .material-symbols-outlined,
+.note-action .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.note-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.note-tags li {
+  padding: 3px 9px;
+  border: 1px solid rgba(95, 99, 104, 0.18);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.4;
+  background: color-mix(in srgb, var(--surface) 45%, transparent);
+}
+
+.note-reminder {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  padding: 5px 8px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  font-size: 11px;
+}
+
+.note-reminder .material-symbols-outlined {
+  font-size: 16px;
 }
 
 .note .note-footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 12px;
-  color: #5f6368;
+  margin-top: 8px;
+  color: var(--text-secondary);
   opacity: 0;
   transition: opacity 160ms ease;
 }
@@ -53,8 +168,9 @@
   opacity: 1;
 }
 
-.note-footer .material-symbols-outlined {
-  font-size: 20px;
+.note-action {
+  width: 30px;
+  height: 30px;
 }
 
 .note .check-circle {
@@ -62,4 +178,12 @@
   top: -20px;
   left: -20px;
   visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .note-drag-handle,
+  .pin-button,
+  .note .note-footer {
+    opacity: 1;
+  }
 }

@@ -1,7 +1,25 @@
 .app-shell {
+  --page-bg: #f8f9fa;
+  --surface: #fff;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --border-color: #e8eaed;
+  --input-bg: #f1f3f4;
+  --hover-bg: #f1f3f4;
   width: 100%;
   min-height: 100vh;
-  background: #f8f9fa;
+  color: var(--text-primary);
+  background: var(--page-bg);
+}
+
+.app-shell[data-theme='dark'] {
+  --page-bg: #202124;
+  --surface: #202124;
+  --text-primary: #e8eaed;
+  --text-secondary: #bdc1c6;
+  --border-color: #3c4043;
+  --input-bg: #303134;
+  --hover-bg: #3c4043;
 }
 
 .content-shell {
@@ -24,12 +42,16 @@
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
 }
 
 .nav-icons:hover,
 .menu:hover,
 .hover:hover {
-  background: rgba(95, 99, 104, 0.08);
+  background: var(--hover-bg);
 }
 
 .menu {
@@ -49,6 +71,47 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.reminder-banner {
+  display: flex;
+  gap: 12px;
+  width: min(100%, 640px);
+  margin: 0 auto 20px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  background: var(--surface);
+}
+
+.reminder-banner > .material-symbols-outlined {
+  color: #f9ab00;
+}
+
+.reminder-banner ul {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reminder-banner li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.reminder-banner button {
+  border: 0;
+  border-radius: 4px;
+  padding: 6px 10px;
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

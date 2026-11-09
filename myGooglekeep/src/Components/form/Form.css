@@ -1,8 +1,8 @@
 .form-container {
-  background: #fff;
+  background: var(--surface);
   width: min(100%, 640px);
   margin: 0 auto 36px;
-  border: 1px solid #dadce0;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(60, 64, 67, 0.16);
   transition: box-shadow 160ms ease;
@@ -17,25 +17,34 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  color: #5f6368;
+  color: var(--text-secondary);
 }
 
-.note-text {
+.note-text,
+.note-tags-input {
   border: none;
+  background: transparent;
   font-size: 15px;
   min-height: 42px;
   padding: 10px 12px;
   width: 100%;
-  color: #202124;
+  color: var(--text-primary);
+}
+
+.note-tags-input {
+  font-size: 13px;
+  min-height: 36px;
+  color: var(--text-secondary);
 }
 
 .note-title {
   border: none;
+  background: transparent;
   font-size: 16px;
   min-height: 42px;
   padding: 10px 12px;
   width: 100%;
-  color: #202124;
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -51,10 +60,11 @@
   padding: 8px 12px;
 }
 
-.form .form-actions .icons {
+.form-tools {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
+  color: #5f6368;
 }
 
 .form .form-actions {
@@ -66,22 +76,41 @@
   padding: 0 2px;
 }
 
-.tools {
+.form-color-icon {
+  font-size: 20px;
+}
+
+.form-hint {
+  font-size: 12px;
+}
+
+.reminder-input {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  color: #5f6368;
-  cursor: pointer;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 12px;
+  color: var(--text-secondary);
+  font-size: 13px;
 }
 
-.tools-text {
-  display: none;
+.reminder-input > .material-symbols-outlined {
+  font-size: 19px;
 }
 
-.close-btn {
+.reminder-input input {
+  min-width: 0;
+  width: 180px;
+  max-width: 62%;
+  margin-left: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 5px 8px;
+  color: var(--text-primary);
+  background: var(--surface);
+}
+
+.save-btn {
   background: transparent;
   border: none;
   border-radius: 4px;
@@ -89,42 +118,75 @@
   font-size: 14px;
   font-weight: 500;
   padding: 8px 16px;
+  color: var(--text-primary);
+}
+
+.save-btn:hover {
+  background: var(--hover-bg);
+}
+
+.color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 10px 10px;
+}
+
+.color-swatch {
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgba(95, 99, 104, 0.35);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+}
+
+.color-swatch.selected {
+  outline: 2px solid #5f6368;
+  outline-offset: 2px;
+}
+
+.color-swatch.selected::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
   color: #202124;
+  font-size: 14px;
 }
 
-.close-btn:hover {
-  background: #f1f3f4;
-}
-
-.small-icon {
-  font-size: 20px;
+.form-error {
+  color: #b3261e;
+  font-size: 12px;
+  padding: 0 10px;
 }
 
 .empty-state {
   text-align: center;
-  color: #80868b;
+  color: var(--text-secondary);
   font-size: 15px;
   margin-top: 72px;
 }
 
 @media (max-width: 480px) {
-  .form .form-actions .icons {
-    gap: 0;
-    flex: 1 1 100%;
-    min-width: 0;
-    flex-wrap: wrap;
-  }
-
   .form .form-actions {
     flex-wrap: wrap;
   }
 
-  .tools {
-    width: 32px;
-    height: 32px;
+  .reminder-input {
+    flex-wrap: wrap;
   }
 
-  .close-btn {
+  .reminder-input input {
+    width: 165px;
+  }
+
+  .save-btn {
     margin-left: auto;
+  }
+
+  .form-hint {
+    font-size: 11px;
   }
 }

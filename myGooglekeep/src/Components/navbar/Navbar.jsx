@@ -1,6 +1,6 @@
 import './Navbar.css';
 
-function Navbar() {
+function Navbar({ searchTerm, onSearchChange, darkMode, onToggleDarkMode }) {
   return (
     <nav>
       <div className="logo">
@@ -16,10 +16,24 @@ function Navbar() {
       <div className="search-area">
         <div className="search-icon">
           <span className="material-symbols-outlined hover">search</span>
-          <input type="text" id="search-input" placeholder="Search" />
-          <span className="material-symbols-outlined hover" id="clear-search" style={{ display: 'none' }}>
-            close
-          </span>
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Search notes"
+            aria-label="Search notes by title, text, or category"
+            value={searchTerm}
+            onChange={(event) => onSearchChange(event.target.value)}
+          />
+          {searchTerm && (
+            <button
+              className="clear-search"
+              type="button"
+              aria-label="Clear search"
+              onClick={() => onSearchChange('')}
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+          )}
         </div>
       </div>
       <div className="nav-icons">
@@ -28,9 +42,16 @@ function Navbar() {
       <div className="nav-icons">
         <span className="material-symbols-outlined hover">view_agenda</span>
       </div>
-      <div className="nav-icons">
-        <span className="material-symbols-outlined hover">settings</span>
-      </div>
+      <button
+        className="nav-icons theme-toggle"
+        type="button"
+        aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        aria-pressed={darkMode}
+        title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        onClick={onToggleDarkMode}
+      >
+        <span className="material-symbols-outlined">{darkMode ? 'light_mode' : 'dark_mode'}</span>
+      </button>
       <div className="profile-area">
         <div className="nav-icons">
           <span className="material-symbols-outlined hover">apps</span>
