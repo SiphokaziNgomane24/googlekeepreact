@@ -1,65 +1,104 @@
 .sidebar {
-  position: fixed;
-  left: 0;
-  top: 64px;
+  position: sticky;
+  top: 73px;
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  flex: 0 0 240px;
   color: #5f6368;
-  width: 80px;
-  overflow-x: hidden;
-  transition: 0.8s;
-  height: 100%;
+  width: 240px;
+  height: calc(100vh - 73px);
+  padding: 8px 12px 0 0;
+  transition: width 180ms ease;
 }
+
 .sidebar-hover {
-    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
-    0 2px 6px 2px rgba(60, 64, 67, 0.149);
-    background: white;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.2);
+  background: #fff;
 }
+
 .active {
-  background-color: #fef0c3;
+  background-color: #feefc3;
   border-radius: 50%;
-  color: black;
+  color: #202124;
 }
+
 .active:hover {
-  background-color: #fef0c3;
+  background-color: #feefc3;
 }
 
 .sidebar .sidebar-item {
-  padding: 3px 0;
+  min-height: 48px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   cursor: pointer;
   white-space: nowrap;
+  border-radius: 0 24px 24px 0;
 }
 
 .sidebar-item .sidebar-text {
-  color: black;
-  font-size: 0.9rem;
-  margin-left: 20px;
-  width: 250px;
+  color: #202124;
+  font-size: 14px;
+  margin-left: 24px;
 }
 
 .sidebar-item .material-symbols-outlined {
-  margin-left: 18px; 
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
 }
 
 .sidebar-item:nth-child(1) {
-  margin-top: 5px;
+  margin-top: 0;
 }
 
 .sidebar-item:hover {
   background: #f1f3f4;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
 }
 
 .sidebar-active-item {
-  background-color: #fef0c3;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  background-color: #feefc3;
 }
 
 .sidebar-active-item:hover {
-  background-color: #fef0c3;
+  background-color: #feefc3;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: auto;
+    padding: 8px 12px;
+    background: #fff;
+    border-bottom: 1px solid #e8eaed;
+  }
+
+  .sidebar .sidebar-item {
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 10px;
+    border-radius: 24px;
+  }
+
+  .sidebar-item .sidebar-text {
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar .sidebar-item {
+    flex-direction: column;
+    gap: 2px;
+    min-height: 54px;
+    padding: 4px 8px;
+  }
+
+  .sidebar-item .sidebar-text {
+    margin: 0;
+    font-size: 11px;
+  }
 }
